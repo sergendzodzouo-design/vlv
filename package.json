@@ -20,7 +20,8 @@
     "format:check": "prettier --check .",
     "db:check": "node --env-file=.env scripts/db-check.mjs",
     "db:migrate": "node --env-file=.env scripts/migrate.mjs up",
-    "db:status": "node --env-file=.env scripts/migrate.mjs status"
+    "db:status": "node --env-file=.env scripts/migrate.mjs status",
+    "db:verify": "node --env-file=.env scripts/db-verify.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",

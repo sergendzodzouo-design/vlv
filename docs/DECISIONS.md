@@ -55,3 +55,19 @@ Ce fichier garde la trace des décisions validées, pour pouvoir reprendre le pr
 - `npm audit` signale 11 vulnérabilités modérées, toutes issues de `minimatch` via ESLint et typescript-eslint (outils de développement uniquement). Ne pas utiliser `npm audit fix --force`, qui installerait ESLint 4. À réexaminer avant la mise en production.
 - Les scripts de base de données ne vérifient pas le certificat SSL (développement uniquement). À durcir avant la production.
 - Le contrôle automatique GitHub est en attente dans `docs/ci-workflow.yml`. Il demande une autorisation `workflow` sur le jeton d'accès.
+
+## Règles garanties par la base de données
+
+- Un type d'organisation limite les types d'offre : un concessionnaire (DEALER) ou un particulier géré par VLV (PRIVATE_SELLER) vend, un loueur (RENTAL_COMPANY) loue, BOTH fait les deux.
+- Une offre ne peut viser que le véhicule de sa propre organisation. Le modèle d'un véhicule doit correspondre à sa marque et à sa catégorie, l'arrondissement à sa ville.
+- Un véhicule a au plus une offre active de location et une offre active de vente.
+- Les conditions de location n'existent que pour les offres de location.
+- Les historiques (certification, statut d'offre) et le journal d'audit sont en ajout seul.
+- La vue `public_offers` est le seul endroit qui définit la visibilité publique : offre publiée, dans sa période de validité, partenaire certifié, véhicule actif.
+- Les montants sont limités à la devise XAF pour l'instant. La contrainte se relâchera par migration le jour d'une extension multi-devises.
+
+## À reconfirmer
+
+- Permissions par défaut des rôles (migration 0003) et arrondissements de Brazzaville (9) et Pointe-Noire (6) : écrits de mémoire, à valider par VLV avant la production.
+- Une modification de prix, de photos ou d'identité d'un véhicule sur une offre publiée la renvoie en modération : règle appliquée par l'API, pas par la base.
+- Une offre de location doit avoir ses conditions de location avant soumission : règle appliquée par l'API.
