@@ -71,3 +71,11 @@ Ce fichier garde la trace des décisions validées, pour pouvoir reprendre le pr
 - Permissions par défaut des rôles (migration 0003) et arrondissements de Brazzaville (9) et Pointe-Noire (6) : écrits de mémoire, à valider par VLV avant la production.
 - Une modification de prix, de photos ou d'identité d'un véhicule sur une offre publiée la renvoie en modération : règle appliquée par l'API, pas par la base.
 - Une offre de location doit avoir ses conditions de location avant soumission : règle appliquée par l'API.
+
+## API
+
+- D20 : API en NestJS 12, projet ESM, tests avec Vitest, validation par schémas Zod partagés. Validé.
+- D22 : `@nestjs/observe` n'est pas utilisé. Aucun outil de traçabilité tiers sans décision explicite sur les données envoyées.
+- D23 : l'API est analysée avec ESLint, comme le reste du monorepo. oxlint, `.prettierrc` et `@nestjs/mau` du modèle ont été retirés.
+- Dette suivie : l'API utilise Vitest 4, le paquet partagé Vitest 5. À unifier quand NestJS supportera Vitest 5.
+- L'API écoute sur le port 3001 en développement. Le site Next.js utilisera le 3000.
