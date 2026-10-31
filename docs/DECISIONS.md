@@ -41,3 +41,17 @@ Ce fichier garde la trace des décisions validées, pour pouvoir reprendre le pr
 - D14 : hébergement de l'API et budget de production.
 - D15 : politique d'annulation, de retard, de dommages et de litige.
 - Rôle juridique de VLV et flux d'argent (qui encaisse, qui reverse les partenaires, caution).
+
+## Base de données
+
+- D3' : Supabase (authentification, base PostgreSQL, stockage des photos). Validé. Accès direct par API désactivé, connexion par Session pooler.
+- D19 : migrations en fichiers SQL numérotés (dossier `database/migrations`) appliqués par `scripts/migrate.mjs`. Sans retour arrière automatique : on corrige par une nouvelle migration. Une migration appliquée ne se modifie jamais.
+- Statuts en `text` avec contrainte `check`, plutôt qu'en types énumérés, pour faire évoluer les listes sans migration lourde.
+- Row Level Security activée sur toutes les tables, sans règle d'accès : tout passe par l'API VLV.
+- Valeurs par défaut retenues pour le schéma : marques et modèles en tables, plaque d'immatriculation privée et facultative, commission stockée par organisation (10 % par défaut).
+
+## Dette technique suivie
+
+- `npm audit` signale 11 vulnérabilités modérées, toutes issues de `minimatch` via ESLint et typescript-eslint (outils de développement uniquement). Ne pas utiliser `npm audit fix --force`, qui installerait ESLint 4. À réexaminer avant la mise en production.
+- Les scripts de base de données ne vérifient pas le certificat SSL (développement uniquement). À durcir avant la production.
+- Le contrôle automatique GitHub est en attente dans `docs/ci-workflow.yml`. Il demande une autorisation `workflow` sur le jeton d'accès.

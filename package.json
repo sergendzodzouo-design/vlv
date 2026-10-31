@@ -18,7 +18,9 @@
     "test": "turbo run test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "db:check": "node --env-file=.env scripts/db-check.mjs"
+    "db:check": "node --env-file=.env scripts/db-check.mjs",
+    "db:migrate": "node --env-file=.env scripts/migrate.mjs up",
+    "db:status": "node --env-file=.env scripts/migrate.mjs status"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
