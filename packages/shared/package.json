@@ -1,0 +1,17 @@
+{
+  "name": "@vlv/shared",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Types, constantes et utilitaires partagés (web, admin, API, futur mobile)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  }
+}

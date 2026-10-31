@@ -1,0 +1,26 @@
+# Dépendances
+node_modules/
+
+# Builds et caches
+.next/
+dist/
+build/
+out/
+.turbo/
+coverage/
+
+# Variables d'environnement : JAMAIS dans Git
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Système et éditeur
+Thumbs.db
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
