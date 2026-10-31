@@ -17,11 +17,13 @@
     "lint": "turbo run lint",
     "test": "turbo run test",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "db:check": "node --env-file=.env scripts/db-check.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
     "eslint": "^9.39.5",
+    "pg": "^8.23.1",
     "prettier": "^3.9.10",
     "turbo": "^2.11.10",
     "typescript": "~6.0",
