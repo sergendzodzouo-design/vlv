@@ -9,6 +9,13 @@ const envSchema = z
       .refine((value) => /^postgres(ql)?:\/\//.test(value), "doit commencer par postgresql://"),
     DATABASE_POOL_MAX: z.coerce.number().int().min(1).max(15).default(5),
     DATABASE_SSL: z.enum(["verify", "no-verify"]).default("verify"),
+    SUPABASE_URL: z
+      .string()
+      .refine(
+        (value) => /^https:\/\/[^\s/]+\/?$/.test(value),
+        "doit être une adresse https://… sans chemin",
+      )
+      .transform((value) => value.replace(/\/+$/, "")),
   })
   .superRefine((env, ctx) => {
     if (env.NODE_ENV === "production" && env.DATABASE_SSL === "no-verify") {

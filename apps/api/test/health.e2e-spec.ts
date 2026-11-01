@@ -14,8 +14,12 @@ describe("API VLV (e2e)", () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
       .overrideProvider(ENV)
-      .useValue(
-        parseEnv({ NODE_ENV: "test", DATABASE_URL: "postgresql://user:pw@localhost:5432/test" }),
+            .useValue(
+        parseEnv({
+          NODE_ENV: "test",
+          DATABASE_URL: "postgresql://user:pw@localhost:5432/test",
+          SUPABASE_URL: "https://testproject.supabase.co",
+        }),
       )
       .overrideProvider(DatabaseService)
       .useValue(database)
