@@ -1,12 +1,6 @@
 import type { INestApplication } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
-import {
-  type JWTVerifyGetKey,
-  SignJWT,
-  createLocalJWKSet,
-  exportJWK,
-  generateKeyPair,
-} from "jose";
+import { type JWTVerifyGetKey, SignJWT, createLocalJWKSet, exportJWK, generateKeyPair } from "jose";
 import request from "supertest";
 import { AppModule } from "../src/app.module.js";
 import { configureApp } from "../src/app.setup.js";
@@ -14,6 +8,8 @@ import { JWKS_RESOLVER } from "../src/auth/jwt-verifier.service.js";
 import { ENV } from "../src/config/config.module.js";
 import { parseEnv } from "../src/config/env.js";
 import { DatabaseService } from "../src/database/database.service.js";
+
+type SigningKey = Parameters<SignJWT["sign"]>[0];
 
 const SUPABASE_URL = "https://testproject.supabase.co";
 const ISSUER = `${SUPABASE_URL}/auth/v1`;
@@ -23,13 +19,13 @@ type SignOptions = {
   issuer?: string;
   audience?: string;
   expiresAt?: number;
-  key?: CryptoKey | Uint8Array;
+  key?: SigningKey;
   alg?: string;
 };
 
 describe("Authentification (e2e)", () => {
   let app: INestApplication;
-  let privateKey: CryptoKey;
+  let privateKey: SigningKey;
   let resolver: JWTVerifyGetKey;
   const keys: JWTVerifyGetKey = (header, token) => resolver(header, token);
   const now = () => Math.floor(Date.now() / 1000);

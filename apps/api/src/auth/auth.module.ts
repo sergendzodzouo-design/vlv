@@ -6,7 +6,11 @@ import { JwtVerifierService, jwksResolverProvider } from "./jwt-verifier.service
 
 @Module({
   controllers: [AuthController],
-  providers: [jwksResolverProvider, JwtVerifierService, { provide: APP_GUARD, useClass: AuthGuard }],
+  providers: [
+    jwksResolverProvider,
+    JwtVerifierService,
+    { provide: APP_GUARD, useClass: AuthGuard },
+  ],
   exports: [JwtVerifierService],
 })
 export class AuthModule {}

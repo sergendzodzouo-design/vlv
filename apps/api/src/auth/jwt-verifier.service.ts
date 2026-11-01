@@ -53,9 +53,7 @@ export class JwtVerifierService {
     } catch (error) {
       const isTokenProblem =
         error instanceof errors.JOSEError && !(error instanceof errors.JWKSTimeout);
-      this.logger.warn(
-        `Jeton refusé (${error instanceof Error ? error.name : "erreur inconnue"})`,
-      );
+      this.logger.warn(`Jeton refusé (${error instanceof Error ? error.name : "erreur inconnue"})`);
       if (isTokenProblem) throw new UnauthorizedException("Jeton invalide ou expiré.");
       // Clés publiques injoignables : ce n'est pas la faute de l'utilisateur.
       throw new ServiceUnavailableException("Service d'authentification indisponible.");

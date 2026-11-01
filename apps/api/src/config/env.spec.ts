@@ -43,9 +43,9 @@ describe("parseEnv", () => {
   });
 
   it("refuse no-verify en production", () => {
-    expect(() =>
-      parseEnv({ ...base, NODE_ENV: "production", DATABASE_SSL: "no-verify" }),
-    ).toThrow(/DATABASE_SSL/);
+    expect(() => parseEnv({ ...base, NODE_ENV: "production", DATABASE_SSL: "no-verify" })).toThrow(
+      /DATABASE_SSL/,
+    );
   });
 
   it("n'affiche jamais la valeur d'une variable invalide", () => {

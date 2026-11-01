@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Get,
-  Inject,
-  Logger,
-  ServiceUnavailableException,
-} from "@nestjs/common";
+import { Controller, Get, Inject, Logger, ServiceUnavailableException } from "@nestjs/common";
 import { Public } from "../auth/auth.context.js";
 import { DatabaseService } from "../database/database.service.js";
 

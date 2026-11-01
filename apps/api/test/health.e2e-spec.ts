@@ -14,7 +14,7 @@ describe("API VLV (e2e)", () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
       .overrideProvider(ENV)
-            .useValue(
+      .useValue(
         parseEnv({
           NODE_ENV: "test",
           DATABASE_URL: "postgresql://user:pw@localhost:5432/test",
