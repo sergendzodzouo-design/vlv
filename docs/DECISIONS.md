@@ -79,3 +79,8 @@ Ce fichier garde la trace des décisions validées, pour pouvoir reprendre le pr
 - D23 : l'API est analysée avec ESLint, comme le reste du monorepo. oxlint, `.prettierrc` et `@nestjs/mau` du modèle ont été retirés.
 - Dette suivie : l'API utilise Vitest 4, le paquet partagé Vitest 5. À unifier quand NestJS supportera Vitest 5.
 - L'API écoute sur le port 3001 en développement. Le site Next.js utilisera le 3000.
+
+- D24 : la configuration de l'API est validée au démarrage (schémas Zod). Elle refuse de démarrer si une valeur est invalide, sans jamais afficher les valeurs. `DATABASE_SSL=no-verify` est interdit en production.
+- D25 : toutes les erreurs de l'API sortent en `application/problem+json`, avec un identifiant de requête (`x-request-id`). Les erreurs inattendues ne révèlent aucun détail au client.
+- D26 : l'API est préfixée `/api/v1`, écoute sur le port 3001 en développement. Les routes de santé sont `/api/v1/health` et `/api/v1/health/db`.
+- À faire avant la production : sécurité HTTP de l'API (en-têtes, CORS, limitation de débit), vérification du certificat de la base, journalisation structurée.
